@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah Adisty | Luxury Visionary Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Poppins:wght@200;300;400;500;600;700&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        /* ------------------------------------------------------------
+           1. ROOT VARIABLES & THEME CONFIG
+           ------------------------------------------------------------ */
+        :root {
+            /* Palette Primary */
+            --primary-pink: #ffb7b7;
+            --primary-light: #ffdada;
+            --primary-dark: #e8a0a0;
+            --accent-purple: #e2d5f3;
+            --accent-gold: #d4af37;
+            
+            /* Backgrounds */
+            --bg-main: #fffafb;
+            --bg-gradient: linear-gradient(135deg, #fff5f5 0%, #f3e8ff 100%);
+            --glass-base: rgba(255, 255, 255, 0.85);
+            --glass-strong: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            
+            /* Text Colors */
+            --color-heading: #4e3636;
+            --color-body: #6b5b5b;
+            --color-subtle: #9a8c8c;
+            --color-white: #ffffff;
+            
+            /* Transitions & Shadows */
+            --t-slow: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            --t-fast: all 0.3s ease;
+            --shadow-sm: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-md: 0 15px 35px rgba(255, 183, 183, 0.2);
+            --shadow-lg: 0 30px 60px rgba(0,0,0,0.08);
+            
+            /* Sizing */
+            --sidebar-width: 330px;
+            --border-radius: 40px;
+        }
+
+        /* ------------------------------------------------------------
+           2. RESET & BASE SCROLLBAR
+           ------------------------------------------------------------ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--color-body);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            cursor: none; /* Custom Cursor */
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-pink);
+            border-radius: 10px;
+            border: 2px solid white;
+        }
+
+        /* ------------------------------------------------------------
+           3. KEYFRAMES MASTER
+           ------------------------------------------------------------ */
+        @keyframes rotateInfinity {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulseSoft {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; filter: blur(10px); }
+            to { transform: translateY(0); opacity: 1; filter: blur(0); }
+        }
+
+        /* ------------------------------------------------------------
+           4. CUSTOM CURSOR ENGINE
+           ------------------------------------------------------------ */
+        .cursor-follower {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 20px var(--primary-pink);
+        }
+
+        .cursor-outline {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary-pink);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease-out, opacity 0.2s;
+            opacity: 0.5;
+        }
+
+        /* ------------------------------------------------------------
+           5. SIDEBAR NAVIGATION SYSTEM
+           ------------------------------------------------------------ */
+        nav.sidebar {
+            width: var(--sidebar-width);
+            height: 100%;
+            background: var(--glass-base);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            padding: 60px 40px;
+            z-index: 1000;
+            transition: var(--t-fast);
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .profile-frame {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 25px;
+        }
+
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid var(--white);
+            object-fit: cover;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-frame::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 2px dashed var(--primary-pink);
+            border-radius: 50%;
+            animation: rotateInfinity 15s linear infinite;
+        }
+
+        .profile-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--color-heading);
+            margin-top: 15px;
+        }
+
+        .profile-section p {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .nav-links {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .nav-links li {
+            margin-bottom: 12px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-subtle);
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            border-radius: 30px;
+            transition: var(--t-slow);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .nav-links a i {
+            margin-right: 15px;
+            font-size: 1.1rem;
+            color: var(--primary-pink);
+            transition: var(--t-fast);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--white);
+            color: var(--color-heading);
+            transform: translateX(10px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-links a.active {
+            border-left: 5px solid var(--primary-pink);
+        }
+
+        .sidebar-footer {
+            text-align: center;
+        }
+
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-row a {
+            width: 42px;
+            height: 42px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-pink);
+            box-shadow: var(--shadow-sm);
+            transition: var(--t-fast);
+            text-decoration: none;
+        }
+
+        .social-row a:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: translateY(-5px) rotate(10deg);
+        }
+
+        .copyright {
+            font-size: 0.7rem;
+            color: var(--color-subtle);
+            opacity: 0.7;
+        }
+
+        /* ------------------------------------------------------------
+           6. CONTENT AREA & SECTION WRAPPERS
+           ------------------------------------------------------------ */
+        main.main-content {
+            flex-grow: 1;
+            padding: 60px 80px;
+            overflow-y: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-module {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-module.active {
+            display: block;
+            animation: slideInUp 1s ease forwards;
+        }
+
+        .module-header {
+            margin-bottom: 60px;
+        }
+
+        .module-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--color-heading);
+            position: relative;
+            display: inline-block;
+        }
+
+        .module-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 60%;
+            height: 8px;
+            background: var(--primary-pink);
+            border-radius: 10px;
+            opacity: 0.3;
+        }
+
+        .module-header p {
+            color: var(--primary-dark);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* ------------------------------------------------------------
+           7. MODULE: HOME (HERO)
+           ------------------------------------------------------------ */
+        .hero-module {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-welcome {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            line-height: 1;
+            color: var(--color-heading);
+            margin-bottom: 30px;
+        }
+
+        .typed-text {
+            color: var(--primary-pink);
+            text-shadow: 2px 2px 10px rgba(255,183,183,0.3);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--color-body);
+            margin-bottom: 45px;
+            max-width: 650px;
+        }
+
+        .hero-visual {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+        }
+
+        .magic-card {
+            width: 400px;
+            padding: 60px 40px;
+            background: var(--glass-base);
+            backdrop-filter: blur(30px);
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            animation: floatEffect 6s ease-in-out infinite;
+        }
+
+        .magic-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            padding: 22px 60px;
+            background: linear-gradient(45deg, var(--primary-pink), var(--accent-purple));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--t-slow);
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 183, 183, 0.5);
+        }
+
+        /* ------------------------------------------------------------
+           8. MODULE: ABOUT (IDENTITY)
+           ------------------------------------------------------------ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+        }
+
+        .glass-panel {
+            background: white;
+            padding: 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #fff5f5;
+        }
+
+        .glass-panel h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 35px;
+            color: var(--color-heading);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bio-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 0;
+            border-bottom: 1px solid #fef0f0;
+        }
+
+        .bio-row:last-child { border: none; }
+
+        .bio-row b { color: var(--primary-dark); font-weight: 600; }
+
+        /* ------------------------------------------------------------
+           9. MODULE: EDUCATION (TIMELINE)
+           ------------------------------------------------------------ */
+        .timeline-container {
+            position: relative;
+            padding-left: 60px;
+            border-left: 2px dashed var(--primary-pink);
+            margin-left: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .timeline-item::before {
+            content: '🌸';
+            position: absolute;
+            left: -82px;
+            top: 0;
+            background: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary-pink);
+            box-shadow: var(--shadow-sm);
+            z-index: 5;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.3rem;
+            color: var(--color-heading);
+            margin-bottom: 5px;
+        }
+
+        .timeline-item .school {
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-style: italic;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--color-subtle);
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: var(--accent-purple);
+            color: var(--color-heading);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            margin-top: 15px;
+        }
+
+        /* ------------------------------------------------------------
+           10. MODULE: SERVICES (OFFERINGS)
+           ------------------------------------------------------------ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 35px;
+            text-align: center;
+            transition: var(--t-slow);
+            border: 1px solid #fff5f5;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-pink);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            color: var(--primary-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+        }
+
+        /* ------------------------------------------------------------
+           11. MODULE: SKILLS (PROGRESS ENGINE)
+           ------------------------------------------------------------ */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .skill-node {
+            background: white;
+            padding: 50px 30px;
+            border-radius: 40px;
+            text-align: center;
+            border: 1px solid #fff5f5;
+            transition: var(--t-slow);
+            transform-style: preserve-3d;
+        }
+
+        .skill-node:hover {
+            transform: rotateX(10deg) translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .skill-node i {
+            font-size: 3.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 25px;
+        }
+
+        .progress-engine {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+        }
+
+        .progress-engine svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-engine circle {
+            fill: none;
+            stroke-width: 10;
+            stroke: #f8f8f8;
+            stroke-linecap: round;
+        }
+
+        .progress-engine circle.bar {
+            stroke: var(--primary-pink);
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: 3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Value Targets */
+        .active #p-figma { stroke-dashoffset: calc(283 - (283 * 95) / 100); }
+        .active #p-web { stroke-dashoffset: calc(283 - (283 * 90) / 100); }
+        .active #p-js { stroke-dashoffset: calc(283 - (283 * 80) / 100); }
+        .active #p-branding { stroke-dashoffset: calc(283 - (283 * 85) / 100); }
+
+        .perc-label {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--color-heading);
+        }
+
+        /* ------------------------------------------------------------
+           12. MODULE: PORTFOLIO (SHOWCASE)
+           ------------------------------------------------------------ */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .project-card {
+            position: relative;
+            height: 350px;
+            border-radius: 35px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--t-slow);
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.15);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(78, 54, 54, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            opacity: 0;
+            transition: var(--t-fast);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-overlay h3 { color: white; font-size: 1.8rem; margin-bottom: 10px; }
+        .project-overlay p { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+
+        /* ------------------------------------------------------------
+           13. MODULE: TESTIMONIALS (SOCIAL PROOF)
+           ------------------------------------------------------------ */
+        .testi-wrapper {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .testi-card {
+            min-width: 400px;
+            background: white;
+            padding: 45px;
+            border-radius: 35px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #fff5f5;
+        }
+
+        .testi-card p {
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: var(--color-body);
+        }
+
+        .testi-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testi-user img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* ------------------------------------------------------------
+           14. BACKGROUND ELEMENTS
+           ------------------------------------------------------------ */
+        #particles-js {
+            position: absolute;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .ornament-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            opacity: 0.3;
+            animation: pulseSoft 10s infinite;
+        }
+
+        /* ------------------------------------------------------------
+           15. MOBILE ADAPTIVE SYSTEM
+           ------------------------------------------------------------ */
+        @media (max-width: 1024px) {
+            nav.sidebar { width: 100px; padding: 40px 10px; }
+            .profile-frame, .profile-section h2, .profile-section p, .nav-links span, .sidebar-footer { display: none; }
+            .nav-links a { justify-content: center; padding: 20px; }
+            .nav-links a i { margin: 0; }
+            main.main-content { padding: 40px; }
+            .hero-title { font-size: 4rem; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow-y: auto; cursor: auto; }
+            .cursor-follower, .cursor-outline { display: none; }
+            nav.sidebar { width: 100%; height: auto; flex-direction: row; padding: 15px; position: fixed; bottom: 0; top: auto; border-right: none; border-top: 1px solid var(--glass-border); }
+            .nav-links { display: flex; justify-content: space-around; width: 100%; }
+            .nav-links li { margin: 0; }
+            main.main-content { padding: 30px 20px 100px 20px; }
+            .hero-module { flex-direction: column; text-align: center; }
+            .hero-title { font-size: 3rem; }
+            .magic-card { width: 100%; }
+            .about-grid, .portfolio-grid, .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+    <div class="ornament-blob" style="width: 400px; height: 400px; background: var(--primary-pink); top: -100px; left: -100px;"></div>
+    <div class="ornament-blob" style="width: 500px; height: 500px; background: var(--accent-purple); bottom: -150px; right: -150px;"></div>
+
+    <div class="cursor-follower"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="sidebar">
+        <div class="profile-section">
+            <div class="profile-frame">
+                <img src="kk.png" alt="Sarah Adisty">
+            </div>
+            <h2>Andi jelita clarence</h2>
+            <p>Digital Creative</p>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#" class="active" onclick="switchSection('home', event)"><i class="fas fa-home"></i> <span>Beranda</span></a></li>
+            <li><a href="#" onclick="switchSection('about', event)"><i class="fas fa-user-heart"></i> <span>Tentang Diri</span></a></li>
+            <li><a href="#" onclick="switchSection('education', event)"><i class="fas fa-university"></i> <span>Pendidikan</span></a></li>
+            <li><a href="#" onclick="switchSection('services', event)"><i class="fas fa-concierge-bell"></i> <span>Pengalaman</span></a></li>
+            <li><a href="#" onclick="switchSection('skills', event)"><i class="fas fa-magic"></i> <span>Keahlian</span></a></li>
+            <li><a href="#" onclick="switchSection('portfolio', event)"><i class="fas fa-images"></i> <span>Karya</span></a></li>
+        </ul>
+
+      
+            <p class="copyright">© 2026 Designed with ❤️</p>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        
+        <section id="home" class="section-module active">
+            <div class="hero-module">
+                <div class="hero-content">
+                    <p class="hero-welcome">Selamat Datang ,</p>
+                    <h1 class="hero-title">Saya ANDI, <br><span id="typed-text" class="typed-text"></span></h1>
+                    <p class="hero-description">
+                        I am a creative writer with strong skills in storytelling, outlining, and book cover design. I have written
+novels that reached the Top 100 ranking at the national level and have secured writing contracts with
+major platforms such as Fizzo and NovelMe, earning significant royalties. I also collaborate with
+emerging publishers to design compelling and marketable book covers
+                        <a href="#" class="cta-button" onclick="switchSection('portfolio', event)">Lihat Proyek Saya</a>
+                        <a href="0887436649119" class="cta-button" style="background: white; color: var(--color-heading);">Kontak Kami</a>
+                          <div class="sidebar-footer">
+            <div class="social-row">
+                <a href="https://www.instagram.com/andi.jel_?igsh=MXFnbDNkODd5eDUwNg=="><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/andi-jelita-clarence-0218a9286?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+                    </div>
+                </div>
+               
+        </section>
+
+        <section id="about" class="section-module">
+            <div class="module-header">
+                <p>Mengenal Lebih Dekat</p>
+                <h1>Identitas <span style="color:var(--primary-pink);">Diri</span></h1>
+            </div>
+            
+            <div class="about-grid">
+                <div class="glass-panel">
+                    <h2><i class="fas fa-id-card"></i> Data Pribadi</h2>
+                    <div class="bio-row"><b>Nama Lengkap</b> <span>Andi Jelita Clarence</span></div>
+                    <div class="bio-row"><b>Tempat Lahir</b> <span>Samarinda, Indonesia</span></div>
+                    <div class="bio-row"><b>Umur</b> <span>22 tahun</span></div>
+                    <div class="bio-row"><b>Domisili</b> <span>Padang sidempuan selatan</span></div>
+                    <div class="bio-row"><b>Bahasa</b> <span>Indonesia, English,</span></div>
+                </div>
+
+                <div class="glass-panel">
+                    <h2><i class="fas fa-heart"></i> Minat & Passion</h2>
+                    <p style="line-height: 2; color: var(--color-body);">
+                        Hallo!
+Perkenalkan saya Andi Jelita Clarence
+biasa dipanggil Anjel atau Andi. 
+Hobi saya menulis, membaca,
+mendesain, dan bernyanyi. Saya
+kuliah semester 7 jurusan Bahasa
+Indonesia. 
+Saya berpengalaman menjadi editor
+dan  desain grafis mulai tahun 2019
+hingga sekarang
+                    </p>
+                    <div style="margin-top: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span style="background: var(--primary-light); padding: 8px 15px; border-radius: 20px; font-size: 0.8rem;">#outlining,</span>
+                        <span style="background: var(--accent-purple); padding: 8px 15px; border-radius: 20px; font-size: 0.8rem;"># design</span>
+                        <span style="background: var(--primary-light); padding: 8px 15px; border-radius: 20px; font-size: 0.8rem;">#storytelling</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section-module">
+            <div class="module-header">
+                <p>Perjalanan Akademik</p>
+                <h1>Jejak <span style="color:var(--primary-pink);">Edukasi</span></h1>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <h3>UIN SYAHADA</h3>
+                    <span class="school">BAHASA INDONESIA</span>
+                    <p>Fokus pada Interactive Media & Experience Design. Terlibat aktif dalam riset antarmuka pengguna digital yang inklusif bagi penyandang disabilitas.</p>
+                    <span class="year-badge">2020 - 2024</span>
+                </div>
+                <div class="timeline-item">
+                    <h3>SMAN 1 Padang sidempuan</h3>
+                    <span class="school">Ilmu Pengetahuan Alam (MIPA)</span>
+                    <span class="year-badge">2020 - 2023</span>
+                </div>
+                <div class="timeline-item">
+                    <h3>SMPN 2 samarinda</h3>
+                    <span class="school">Sekolah Menengah Pertama</span>
+                    <span class="year-badge">2016 - 2020</span>
+                </div>
+                <div class="timeline-item">
+                    <h3>SDN 006 Samarinda</h3>
+                    <span class="school">Sekolah Dasar</span>
+                    <span class="year-badge">2010 - 2016</span>
+                </div>
+            </div>
+        </section>
+
+       <section id="services" class="section-module">
+            <div class="module-header">
+                <p>Professional Journey</p>
+                <h1>Pengalaman & <span style="color:var(--primary-pink);">Prestasi</span></h1>
+            </div>
+
+            <div class="about-grid">
+                <div class="glass-panel">
+                    <h2><i class="fas fa-briefcase"></i> Pengalaman Kerja</h2>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <b style="color: var(--primary-pink);">Freelance Writer</b>
+                            <span class="year-badge" style="margin: 0;">2018 - 2019</span>
+                        </div>
+                        <p style="font-size: 0.85rem; margin-top: 5px; font-weight: 600;">Fizzo & NovelMe</p>
+                        <ul style="font-size: 0.8rem; margin-left: 15px; margin-top: 5px; line-height: 1.6;">
+                            <li>Penulis eksklusif yang dikontrak untuk memproduksi fiksi panjang.</li>
+                            <li>Fokus pada struktur narasi kuat dan pengembangan karakter konsisten.</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <b style="color: var(--primary-pink);">Book Cover Designer</b>
+                            <span class="year-badge" style="margin: 0;">2019 - Sekarang</span>
+                        </div>
+                        <p style="font-size: 0.85rem; margin-top: 5px; font-weight: 600;">Freelance</p>
+                        <ul style="font-size: 0.8rem; margin-left: 15px; margin-top: 5px; line-height: 1.6;">
+                            <li>Mendesain cover untuk penerbit baru dan penulis independen.</li>
+                            <li>Menerapkan prinsip tipografi dan komposisi warna sesuai tren pasar.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-panel">
+                    <h2><i class="fas fa-trophy"></i> Achievements</h2>
+                    
+                    <div class="bio-row" style="flex-direction: column; align-items: flex-start;">
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span style="font-size: 1.2rem;">🥇</span>
+                            <b>Gold Medal (2019)</b>
+                        </div>
+                        <span style="font-size: 0.85rem; margin-left: 32px;">Olimpiade Bahasa Indonesia Tingkat Nasional</span>
+                    </div>
+
+                    <div class="bio-row" style="flex-direction: column; align-items: flex-start;">
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span style="font-size: 1.2rem;">🥈</span>
+                            <b>Juara 2 Lomba Puisi (2022)</b>
+                        </div>
+                        <span style="font-size: 0.85rem; margin-left: 32px;">Bulan Bahasa IAIN (HMPS Tadris Bahasa Indonesia)</span>
+                    </div>
+
+                    <div class="bio-row" style="flex-direction: column; align-items: flex-start;">
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span style="font-size: 1.2rem;">📈</span>
+                            <b>Top 100 National Novel Writer</b>
+                        </div>
+                        <span style="font-size: 0.85rem; margin-left: 32px;">Peringkat Nasional di platform NovelMe</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section-module">
+            <div class="module-header">
+                <p>Kekuatan Kreatif & Teknis</p>
+                <h1>Keahlian <span style="color:var(--primary-pink);">Spesifik</span></h1>
+            </div>
+
+            <div class="skills-wrapper" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                
+                <div class="skill-node">
+                    <i class="fas fa-feather-alt"></i>
+                    <h3>Story Outlining & Plotting</h3>
+                    <p style="font-size: 0.8rem; color: var(--color-subtle); margin-top: 10px;">Menyusun kerangka cerita dan alur plot yang kuat.</p>
+                </div>
+
+                <div class="skill-node">
+                    <i class="fas fa-file-signature"></i>
+                    <h3>Manuscript Management</h3>
+                    <p style="font-size: 0.8rem; color: var(--color-subtle); margin-top: 10px;">Pengelolaan naskah untuk platform digital.</p>
+                </div>
+
+                <div class="skill-node">
+                    <i class="fas fa-search-plus"></i>
+                    <h3>Research & Plot Development</h3>
+                    <p style="font-size: 0.8rem; color: var(--color-subtle); margin-top: 10px;">Riset mendalam untuk pengembangan cerita.</p>
+                </div>
+
+                <div class="skill-node">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Book Cover Design</h3>
+                    <p style="font-size: 0.8rem; color: var(--color-subtle); margin-top: 10px;">Visualisasi genre buku dalam bentuk desain cover.</p>
+                </div>
+
+                <div class="skill-node">
+                    <i class="fab fa-microsoft"></i>
+                    <h3>Microsoft Office</h3>
+                    <p style="font-size: 0.8rem; color: var(--color-subtle); margin-top: 10px;">Word & Excel untuk produktivitas tulisan.</p>
+                </div>
+
+                <div class="skill-node">
+                    <i class="fas fa-border-all"></i>
+                    <h3>Canva</h3>
+                    <p style="font-size: 0.8rem; color: var(--color-subtle); margin-top: 10px;">Desain grafis cepat dan efektif.</p>
+                </div>
+
+                <div class="skill-node">
+                    <i class="fas fa-pen-fancy"></i>
+                    <h3>Ibis Paint</h3>
+                    <p style="font-size: 0.8rem; color: var(--color-subtle); margin-top: 10px;">Ilustrasi dan detail desain cover manual.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="portfolio" class="section-module">
+            <div class="module-header">
+                <p>Creative Showcase</p>
+                <h1>Galeri <span style="color:var(--primary-pink);">Hasil Kerja</span></h1>
+            </div>
+
+            <div class="portfolio-grid">
+                
+                <div class="project-card" style="height: auto; background: white; padding: 15px;">
+                    <div style="overflow: hidden; border-radius: 20px; height: 450px;">
+                        <img src="2.png" alt="Cover Senior" style="width: 100%; height: 100%; object-fit: cover; object-position: left;">
+                    </div>
+                    <div style="padding: 20px 10px;">
+                        <h3 style="color: var(--color-heading); font-family: 'Playfair Display', serif;">Novel "SENIOR"</h3>
+                        <p style="font-size: 0.85rem; color: var(--primary-dark);">Karya Penulisan & Desain Cover</p>
+                    </div>
+                </div>
+
+                <div class="project-card" style="height: auto; background: white; padding: 15px;">
+                    <div style="overflow: hidden; border-radius: 20px; height: 450px;">
+                        <img src="1.png" alt="Cover Sejuta Rasa" style="width: 100%; height: 100%; object-fit: cover; object-position: right;">
+                    </div>
+                    <div style="padding: 20px 10px;">
+                        <h3 style="color: var(--color-heading); font-family: 'Playfair Display', serif;">Cerpen "Sejuta Rasa"</h3>
+                        <p style="font-size: 0.85rem; color: var(--primary-dark);">Desain Ilustrasi Ibis Paint</p>
+                    </div>
+                </div>
+
+                <div class="project-card" style="grid-column: span 2; display: flex; background: white; padding: 20px; align-items: center; gap: 30px;">
+                    <div style="flex: 1; height: 300px; overflow: hidden; border-radius: 25px; position: relative;">
+                        <div style="position: absolute; top: 10px; right: 10px; background: #ff4757; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.7rem; z-index: 2;">TERJUAL</div>
+                        <img src="cover.png" alt="Sold Cover" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%);">
+                    </div>
+                    <div style="flex: 1;">
+                        <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 10px;">Premium Commission</h2>
+                        <p style="line-height: 1.6; color: var(--color-body);">Hasil kerja desain cover buku yang telah dipesan dan digunakan oleh klien secara eksklusif.</p>
+                        <div style="margin-top: 15px; color: var(--primary-pink); font-weight: bold;">
+                            <i class="fas fa-check-double"></i> Verified Project
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin: 60px 0 30px; display: flex; align-items: center; gap: 15px;">
+            <i class="fas fa-book-open" style="color: var(--primary-pink); font-size: 1.5rem;"></i>
+            <h2 style="font-family: 'Playfair Display', serif;">My Novel Projects</h2>
+        </div>
+
+
+            <div class="portfolio-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                
+                <div class="project-card" style="height: 300px; border-radius: 15px; overflow: hidden;">
+                    <img src="3.png" alt="Senior" style="width: 100%; height: 100%; object-fit: cover; object-position: left;">
+                </div>
+                
+                </div>
+            </div>
+
+        </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        /* 1. INITIALIZE PARTICLES BACKGROUND */
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 70, density: { enable: true, value_area: 800 } },
+                color: { value: ["#ffb7b7", "#e2d5f3", "#ffffff"] },
+                shape: { type: "circle" },
+                opacity: { value: 0.6, random: true },
+                size: { value: 7, random: true },
+                line_linked: { enable: false },
+                move: { enable: true, speed: 1.5, direction: "top", out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "bubble" }, onclick: { enable: true, mode: "push" } },
+                modes: { bubble: { distance: 200, size: 12, opacity: 0.8 } }
+            }
+        });
+
+        /* 2. INITIALIZE TYPING EFFECT */
+        new Typed('#typed-text', {
+            strings: ['Designer.', 'outlining.', 'storytelling.',],
+            typeSpeed: 60,
+            backSpeed: 40,
+            loop: true,
+            cursorChar: '_'
+        });
+
+        /* 3. SECTION SWITCHER SYSTEM */
+        function switchSection(sectionId, event) {
+            if(event) event.preventDefault();
+            
+            // Remove active classes
+            document.querySelectorAll('.section-module').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active to targeted elements
+            const targetSection = document.getElementById(sectionId);
+            targetSection.classList.add('active');
+            
+            // Trigger link activation
+            const targetLink = document.querySelector(`a[onclick*="${sectionId}"]`);
+            if(targetLink) targetLink.classList.add('active');
+            
+            // Scroll reset
+            document.querySelector('.main-content').scrollTop = 0;
+        }
+
+        /* 4. CUSTOM CURSOR TRACKER */
+        const follower = document.querySelector('.cursor-follower');
+        const outline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            follower.style.transform = `translate(${posX}px, ${posY}px)`;
+            
+            // Outline with lag
+            setTimeout(() => {
+                outline.style.transform = `translate(${posX - 15}px, ${posY - 15}px)`;
+            }, 50);
+        });
+
+        /* 5. INITIALIZE 3D TILT */
+        VanillaTilt.init(document.querySelectorAll("[data-tilt], .skill-node, .project-card"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.3
+        });
+
+        /* 6. CONSOLE DOCUMENTATION */
+        console.log("%cSarah Adisty Professional Portfolio Engine v3.0 Activated", "color: #ffb7b7; font-size: 20px; font-weight: bold;");
+        console.log("All systems operational. Ready to create magic.");
+    </script>
+</body>
+</html>
